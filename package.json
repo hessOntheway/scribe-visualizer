@@ -1,0 +1,24 @@
+{
+  "name": "llm-loop-visualizer",
+  "version": "1.0.0",
+  "description": "Visualize iterative LLM request-response loops from JSON audit logs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm -w backend run dev\" \"npm -w frontend run dev\"",
+    "build": "npm -w frontend run build && npm -w backend run build",
+    "start": "npm -w backend run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
