@@ -200,6 +200,39 @@ button:disabled {
   background: #fdfefe;
 }
 
+/* Collapsible component styles */
+.collapsible {
+  display: block;
+}
+.collapsible-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0 0 0.5rem 0;
+  font: inherit;
+  cursor: pointer;
+}
+.collapsible-header:focus {
+  outline: 2px solid rgba(13,118,143,0.2);
+  border-radius: 8px;
+}
+.collapsible-title {
+  font-weight: 600;
+  color: #17323f;
+}
+.collapsible-toggle {
+  color: #617782;
+  margin-left: 0.5rem;
+}
+.collapsible-content {
+  transition: max-height 0.18s ease;
+}
+
+
 .tool-call-list {
   display: grid;
   gap: 0.6rem;

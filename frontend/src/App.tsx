@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import type { ChangeEvent } from 'react'
 import './App.css'
+import Collapsible from './components/Collapsible'
 
 type ParsedTurn = {
   step: number
@@ -235,50 +236,61 @@ function App() {
                   <h2>Step {selectedTurn.step} Details</h2>
                   <div className="grid">
                     <div>
-                      <h3>Trigger Source</h3>
-                      <p className="badge">{selectedTurn.triggerSource}</p>
-                      <p className="muted">role: {selectedTurn.triggerMessageRole}</p>
-                      <pre>{selectedTurn.triggerMessage || '(empty)'}</pre>
+                      <Collapsible title="Trigger Source" defaultOpen={true}>
+                        <p className="badge">{selectedTurn.triggerSource}</p>
+                        <p className="muted">role: {selectedTurn.triggerMessageRole}</p>
+                        <pre>{selectedTurn.triggerMessage || '(empty)'}</pre>
+                      </Collapsible>
                     </div>
                     <div>
-                      <h3>Latest User Prompt</h3>
-                      <pre>{selectedTurn.latestUserMessage || '(none)'}</pre>
+                      <Collapsible title="Latest User Prompt" defaultOpen={true}>
+                        <pre>{selectedTurn.latestUserMessage || '(none)'}</pre>
+                      </Collapsible>
                     </div>
                     <div>
-                      <h3>Model Response</h3>
-                      <p className="muted">role: {selectedTurn.assistantMessageRole}</p>
-                      <pre>{selectedTurn.responseText || '(empty)'}</pre>
-                      <h3>Raw Response Object</h3>
-                      <pre>{selectedTurn.responseRaw || '(empty)'}</pre>
+                      <Collapsible title="Model Response" defaultOpen={true}>
+                        <p className="muted">role: {selectedTurn.assistantMessageRole}</p>
+                        <pre>{selectedTurn.responseText || '(empty)'}</pre>
+                      </Collapsible>
+
+                      <Collapsible title="Raw Response Object" defaultOpen={true}>
+                        <pre>{selectedTurn.responseRaw || '(empty)'}</pre>
+                      </Collapsible>
                     </div>
                     <div>
-                      <h3>Tool Calls</h3>
-                      <p>{selectedTurn.toolCalls.join(', ') || '(none)'}</p>
-                      {selectedTurn.responseToolCalls.length > 0 && (
-                        <div className="tool-call-list">
-                          {selectedTurn.responseToolCalls.map((toolCall) => (
-                            <div key={toolCall.id} className="tool-call-card">
-                              <p className="badge">{toolCall.name}</p>
-                              <p className="muted">id: {toolCall.id}</p>
-                              <pre>{toolCall.arguments || '(no arguments)'}</pre>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      <h3>Available Tools</h3>
-                      <p>{selectedTurn.availableTools.join(', ') || '(none)'}</p>
+                      <Collapsible title="Tool Calls" defaultOpen={true}>
+                        <p>{selectedTurn.toolCalls.join(', ') || '(none)'}</p>
+                        {selectedTurn.responseToolCalls.length > 0 && (
+                          <div className="tool-call-list">
+                            {selectedTurn.responseToolCalls.map((toolCall) => (
+                              <div key={toolCall.id} className="tool-call-card">
+                                <p className="badge">{toolCall.name}</p>
+                                <p className="muted">id: {toolCall.id}</p>
+                                <pre>{toolCall.arguments || '(no arguments)'}</pre>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        <h3>Available Tools</h3>
+                        <p>{selectedTurn.availableTools.join(', ') || '(none)'}</p>
+                      </Collapsible>
                     </div>
                     <div>
-                      <h3>Token Usage</h3>
-                      <p>prompt: {selectedTurn.tokenUsage.prompt}</p>
-                      <p>completion: {selectedTurn.tokenUsage.completion}</p>
-                      <p>total: {selectedTurn.tokenUsage.total}</p>
+                      <Collapsible title="Token Usage" defaultOpen={true}>
+                        <p>prompt: {selectedTurn.tokenUsage.prompt}</p>
+                        <p>completion: {selectedTurn.tokenUsage.completion}</p>
+                        <p>total: {selectedTurn.tokenUsage.total}</p>
+                      </Collapsible>
                     </div>
                     <div>
-                      <h3>Request Structure</h3>
-                      <p>messages: {selectedTurn.requestMessageCount}</p>
-                      <p>roles: {Object.entries(selectedTurn.rolesHistogram).map(([k, v]) => `${k}:${v}`).join(', ')}</p>
-                      <p>model: {selectedTurn.model}</p>
+                      <Collapsible title="Request Structure" defaultOpen={true}>
+                        <p>messages: {selectedTurn.requestMessageCount}</p>
+                        <p>
+                          roles: {Object.entries(selectedTurn.rolesHistogram).map(([k, v]) => `${k}:${v}`).join(', ')}
+                        </p>
+                        <p>model: {selectedTurn.model}</p>
+                      </Collapsible>
                     </div>
                   </div>
                 </>
